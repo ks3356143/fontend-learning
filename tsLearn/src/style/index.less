@@ -1,0 +1,84 @@
+// 设置变量
+@bg-color: #b7d4a8;
+
+// 清除默认样式
+* {
+    //这里表示所有
+    margin: 0;
+    padding: 0;
+    // 改变盒子计算方式-盒子总大小，就不用算了
+    box-sizing: border-box;
+}
+
+body {
+    font: bold 20px "Courier"
+}
+
+// 设置主窗口样式
+#main {
+    // 开启弹性模型
+    display: flex;
+    // 设置主轴方向,flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性
+    flex-flow: column;
+    // 设置侧轴对齐方式
+    align-items: center;
+    // 设置主轴对齐方式
+    justify-content: space-around;
+
+    width: 360px;
+    height: 420px;
+    background-color: @bg-color;
+    margin: 100px auto; //上边距100px，左右自由
+    border: 10px solid black;
+    border-radius: 40px;
+
+    // 游戏舞台
+    #stage {
+        width: 304px;
+        height: 304px;
+        border: 2px solid black;
+        // 开启相对定位-相对蛇的位置
+        position: relative;
+
+        //设置蛇的样式
+        #snake {
+            &>div {
+                //&在SASS和less都是对父元素指定,这里表示#snake
+                width: 10px;
+                height: 10px;
+                background-color: black;
+                border: 1px solid @bg-color;
+                // 开启绝对定位，因为蛇要移动
+                position: absolute;
+            }
+        }
+
+        #food {
+            width: 10px;
+            height: 10px;
+            left: 40px;
+            top: 100px;
+            position: absolute;
+            // 设置小的
+            display: flex;
+            flex-flow: row wrap; // 主轴方向默认，wrap为容不下的时候换行
+            justify-content: space-between;
+            align-content: space-between; // 注意不叫align-items,区别就是多行的时候！进行设置对齐方式
+
+            &>div{
+                width: 4px;
+                height: 4px;
+                background-color: black;
+                transform: rotate(45deg); // transform该元素变化，rotate旋转
+            }
+        }
+    }
+
+    // 记分牌
+    #score-panel {
+        width: 300px;
+        display: flex;
+        // 设置主轴对齐方式
+        justify-content: space-between;
+    }
+}
