@@ -12,6 +12,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'), //__dirname用来动态获取当前文件模块所属目录的绝对路径
         // 打包后文件的文件
         filename: "bundle.js",
+        environment:{
+            arrowFunction:false,
+        }
     },
     // 指定webpack打包时候使用的模块
     module: {
