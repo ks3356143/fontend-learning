@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">真的牛</div>
+    <script src="../../js/vue.js"></script>
+    <script>
+        Vue.createApp({
+            template: `  
+                <div>
+                    <h2>{{ message }}</h2>
+                    <h2>{{ counter }}</h2>
+                    <button @click="increment">+1</button>
+                    <button @click="decrement">-1</button>
+                </div>
+            `,
+            data: () => { // 无名函数返回对象,固定的因为createApp参数
+                return {  // 会被Vue加入到响应式属性里面,并且在模板里面胡子语法渲染[响应式编程]
+                    message: "HelloWorld!",
+                    counter: 100
+                }
+            },
+            methods: { //可以监听属性的函数集
+                increment() { //在模板里面写@标识符-表示原生的.addEventListener('click',increment())
+                    this.counter++ // 本质上不是拿的这个东西，本质是proxy！！！
+                },
+                decrement() {
+                    this.counter--
+                }
+            },
+        }).mount('#app');  //template模板字符串-如何提示？
+
+    </script>
+</body>
+
+</html>

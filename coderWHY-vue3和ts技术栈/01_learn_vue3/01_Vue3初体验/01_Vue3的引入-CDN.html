@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const why = {
+            template:'<h2>Hello Word</h2>'
+        }
+        const app = Vue.createApp(why); // 有个createApp的函数,传入一个对象，就是挂载到前面app里面去的
+        app.mount("#app")  // 这个app要挂在到上面那个div上面,不需要写document.get....内部自己去取
+    </script>
+</body>
+</html>
