@@ -1,9 +1,12 @@
 {
+    // "include": [
+    //     "./abao/**/*"
+    // ],
     "compilerOptions": {
-        "target":"ES6",
+        "target": "ES6",
         "module": "ES6",
         "strict": true,
-        "outDir":"./tslean",
+        "outDir": "./tslean",
         "noEmitOnError": true
     }
 }
