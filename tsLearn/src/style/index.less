@@ -1,5 +1,6 @@
 // 设置变量
 @bg-color: #b7d4a8;
+
 // 清除默认样式
 * {
     //这里表示所有
@@ -10,8 +11,28 @@
 }
 
 body {
-    font: bold 20px "Courier"
+    font: bold 20px "Courier";
+    position: relative;
+    input{
+        width: 200px;
+        height: 50px;
+        position: absolute;
+        left: 100px;
+        top: -50px;
+        border: none;
+        background-color: #e0caca;
+        transition: all 0.3s;
+        &:hover{
+            background-color: #58f30a;
+            cursor: pointer;
+        }
+        &:active{
+            transform: scale(0.98);
+            box-shadow: 3px 2px 22px 1px rgba(0,0,0,0.24);
+        }
+    }
 }
+
 
 // 设置主窗口样式
 #main {
@@ -64,7 +85,7 @@ body {
             justify-content: space-between;
             align-content: space-between; // 注意不叫align-items,区别就是多行的时候！进行设置对齐方式
 
-            &>div{
+            &>div {
                 width: 4px;
                 height: 4px;
                 background-color: black;
