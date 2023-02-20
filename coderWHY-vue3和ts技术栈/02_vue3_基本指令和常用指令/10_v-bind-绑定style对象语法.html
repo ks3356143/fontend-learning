@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <!-- 默认样式 -->
+        <div style="color:red;">
+            内联样式变红
+        </div>
+        <!-- vue写v-bind写样式，模板语法！ -->
+        <div v-bind:style="{
+             color : red,
+            'font-size':'50px',
+        }">
+            Vue内联样式变红
+        </div>
+        <div v-bind:style="{
+            color : red,
+           fontSize : fontSize,
+       }">
+            Vue内联样式变红
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    red: '#ff0000', // 这里red就是变量，注意加引号和不加引号
+                    fontSize: '50px'
+                }
+            },
+            methods: {
+
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

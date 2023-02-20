@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+    <style>
+        .active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <div>
+            <!-- 对象语法:{'active':boolean} -->
+            <h2 :class="{active:showRed}">HEHEHE</h2>
+            <h2 :class="{'active':showRed}">HEHEHE</h2>
+            <button @click="changeShowRed">点击切换变色</button>
+            <!-- 动态结合 -->
+            <h2 class="dongtai1 moren2" :class="{active:showRed}">HEHEHE</h2>
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    showRed:true
+                }
+            },
+            methods: {
+                changeShowRed(){
+                    this.showRed = !this.showRed
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

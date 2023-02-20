@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码片段</title>
+    <style>
+        a{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app">
+
+    </div>
+    <!-- 模板！ -->
+    <!-- vue2不允许有多个根元素，vue3可以允许 -->
+    <template id="my-app">
+        <div>
+            <a v-bind:href="link">百度一下，你就知道</a>
+            <img :src="imgUrl" alt="">
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    imgUrl: "https://lmg.jj20.com/up/allimg/1114/040221103339/210402103339-8-1200.jpg",
+                    link:"https://www.baidu.com/"
+                }
+            },
+            methods: {
+                
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

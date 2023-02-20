@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码片段</title>
+</head>
+
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app">
+
+    </div>
+    <template id="my-app">
+        <div>
+            <h2>{{ counter }}</h2>
+            <h2 v-once>{{ counter }}</h2>
+            <button @click="increment">+1</button>
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: "欢迎你陈俊亦",
+                    counter: 100
+                }
+            },
+            methods: {
+                increment() {
+                    this.counter += 1
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

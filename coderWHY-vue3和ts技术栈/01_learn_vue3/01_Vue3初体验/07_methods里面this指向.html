@@ -47,6 +47,19 @@
         }).mount('#app');
 
     </script>
+
+    <script>
+        function bar() {
+            console.log(this);
+        }
+        const info = {
+            name: '显式绑定'
+        }
+        const foo = bar.bind(info)
+        foo() // 注意bind()是新建一个函数进行绑定
+        
+        
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <!-- 注意加引号和不加引号！ -->
+        <div :class="[title,'title',{active:true}]">
+            哈哈哈
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    title: 'cba', //注意！
+                }
+            },
+            methods: {
+
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

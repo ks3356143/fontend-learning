@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <!-- 数组里面对象进行合并 -->
+        <div :style="[ {} , {} , styleObj , style2Obj]">
+            变色！
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    styleObj:{
+                        'font-size': '50px',
+                    },
+                    style2Obj:{
+                        color:'red', // 值要加引号哟！
+                        'textDecoration':'line-through',
+                    }
+                }
+            },
+            methods: {
+                
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
