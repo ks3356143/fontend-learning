@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <ul>
+            <li v-for="item in message">{{ item }}</li>
+        </ul>
+        <!-- @keyup事件在button这个元素没有 -->
+        <input type="text" v-model="newMovie"  @keyup.enter="btn">
+        <button @click="btn">添加电影</button>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: ['yi','er','san','si'],
+                    newMovie:''
+                }
+            },
+            methods: {
+                btn(){
+                    this.message.push(this.newMovie)
+                    this.newMovie = ""
+
+                    this.message = this.message.filter(item => item.length > 2)
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

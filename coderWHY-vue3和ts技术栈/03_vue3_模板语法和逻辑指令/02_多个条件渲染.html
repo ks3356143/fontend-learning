@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
     <meta charset="UTF-8">
     <title>代码片段</title>
 </head>
-
 <body>
     <script src="../js/vue.js"></script>
     <div id="app"></div>
     <template id="my-app">
-        <div v-bind="info">哈哈哈</div>
-        <!-- 这个东西也有语法糖 -->
-        <div :="info">哈哈哈</div>
+        <!-- v-model双向绑定 -->
+        <!-- v-if是惰性的，为false时候没有渲染直接被摧毁，dom查看不到，而v-show？ -->
+        <input type="text" v-model="score">
+        <h2 v-if="score > 90">优秀</h2>
+        <h2 v-else-if="score > 60">良好</h2>
+        <h2 v-else>极差</h2>
     </template>
     <script>
         const app = Vue.createApp({
             template: "#my-app",
             data: () => {
                 return {
-                    info: {
-                        class: "Active",
-                        style: { "color": 'red', color:'red' }
-                    }
+                    score:91,
                 }
             },
             methods: {
-
+                
             },
         })
         app.mount("#app")

@@ -4,15 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>代码片段</title>
+    <style>
+        .divider {
+            list-style: none;
+            width: auto;
+            height: 5px;
+            background-color: rgb(173, 201, 201);
+        }
+    </style>
 </head>
 
 <body>
     <script src="../js/vue.js"></script>
     <div id="app"></div>
     <template id="my-app">
-        <div v-bind="info">哈哈哈</div>
-        <!-- 这个东西也有语法糖 -->
-        <div :="info">哈哈哈</div>
+        <ul>
+            <template v-for="value,key in info">
+                <li>{{ key }}</li>
+                <li>{{ value }}</li>
+                <li class="divider"></li>
+            </template>
+        </ul>
     </template>
     <script>
         const app = Vue.createApp({
@@ -20,8 +32,8 @@
             data: () => {
                 return {
                     info: {
-                        class: "Active",
-                        style: { "color": 'red', color:'red' }
+                        name: 'chen',
+                        age: 18
                     }
                 }
             },

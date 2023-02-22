@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <div>
+            <!-- 注意如果没有传参，自动有一个event对象，有传参必须加上e -->
+            <button @click="fn1">按钮1</button>
+            <!-- 不仅相传event对象，还有其他的呢？必须加上多勒$event  -->
+            <button @click="fn2($event,'chen')">按钮2</button>
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: "欢迎你陈俊亦"
+                }
+            },
+            methods: {
+                fn1(e){
+                    console.log(e); // 在基本js中按钮点击有event对象
+                },
+                fn2(e,name){
+                    console.log(e); // 在基本js中按钮点击有event对象
+                    console.log(name);
+                },
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
