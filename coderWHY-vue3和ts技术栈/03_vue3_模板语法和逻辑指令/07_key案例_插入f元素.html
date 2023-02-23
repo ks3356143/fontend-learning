@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <div>
+            <ul>
+                <li v-for="item in letters" :kye="item">{{ item }}</li>
+            </ul>
+            <!-- 注意keydown.enter必须focus是该button元素 -->
+            <button @keydown.enter="insertF">插入F元素</button>
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    letters:['1a','2b','3c','4d']
+                }
+            },
+            methods: {
+                insertF(){
+                    this.letters.splice(2,0,"F")
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
