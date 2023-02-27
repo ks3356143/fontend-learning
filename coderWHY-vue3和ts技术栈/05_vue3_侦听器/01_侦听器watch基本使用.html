@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        你的问题<input type="text" v-model="question">
+        <button @click="queryAnswer">查找答案</button>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    // 侦听question变化，去进行逻辑处理js，比如网络请求
+                    question: 'Hello world',
+                    anwser:'你的答案'
+                }
+            },
+            methods: {
+            },
+            watch:{
+                // question为我们要侦听data中属性名称（也可以是组件props），参数1是变化后的新值，参数2为变化前的旧值
+                question(newValue,oldValue){
+                    console.log(`新值${newValue}，旧值${oldValue}`);
+                }
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

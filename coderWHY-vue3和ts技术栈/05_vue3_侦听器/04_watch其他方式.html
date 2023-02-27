@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <div>
+            <h2>{{ message }}</h2>
+            <h2>{{ info }}</h2>
+            <button @click="changeMessage">基本改变message</button>
+            <button @click="changeObWhole">改变对象整体</button>
+            <button @click="changeSingleValue">改变对象里面单独值-深度侦听</button>
+        </div>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: '123',
+                    info: {
+                        name: 'chen',
+                        age: 18
+                    }
+                }
+            },
+            methods: {
+                changeMessage() {
+                    this.message = '改变基本'
+                },
+                changeObWhole() {
+                    this.info = {
+                        name: 'chen-gai',
+                        age: 32
+                    }
+                },
+                changeSingleValue() {
+                    this.info.name = '邓跃林'
+                }
+            },
+            watch: {
+                message(newValue, oldValue) {
+                    console.log(newValue, oldValue);
+                },
+                info: {
+                    handler: function (newValue, oldValue) {
+                        console.log(newValue, oldValue);
+                    },
+                    deep:true,
+                },
+                // 单独侦听属性值，不侦听对象的值,必须要引号
+                "info.name":function(newValue,oldValue){
+                    console.log(newValue,oldValue);
+                }
+                // this.$watch用法,在其他地方使用
+            },
+            // 第三种就是其他地方添加侦听器this.$watch
+            created() {
+                this.$watch('info',function(newValue,oldValue){console.log(newValue,oldValue);},{deep:true,immediate:true})
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

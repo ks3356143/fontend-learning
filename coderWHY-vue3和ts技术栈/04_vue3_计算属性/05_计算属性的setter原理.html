@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <div>
+            <h2>{{ fullName }}</h2>
+        </div>
+        <button @click="changeFullName">修改fullName</button>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    firstName: 'chen',
+                    lastName: 'junyi'
+                }
+            },
+            methods: {
+                changeFullName() {
+                    this.fullName = 'deng yuelin'
+                }
+            },
+            computed: {
+                // fullName的getter方法的语法糖
+                // fullName:function() {
+                //     return this.firstName + ' ' + this.lastName
+                // },
+
+                // fullName的getter和setter方法
+                fullName : {
+                    get:function(){ // 有点像python里面打印实例的函数！
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    set:function(newValue){
+                        console.log('我看改变了我对象的值，我这个stter执行吗') // 我们在上面修改了fullName，然后这里打印了！
+                        const names = newValue.split(" ")
+                        this.firstName = names[0]
+                        this.lastName = names[1]
+                    }
+                    
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
