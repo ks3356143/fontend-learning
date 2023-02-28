@@ -9,6 +9,8 @@
     <div id="app"></div>
     <template id="my-app">
         <input type="text" v-model.number="message">
+        <input type="text" v-model.lazy="message">
+        <input type="text" v-model.trim="message">
         <h2>{{message}}</h2>
         <button @click="showTypeOf">查看类型</button>
     </template>
