@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <input type="text" v-model.number="message">
+        <h2>{{message}}</h2>
+        <button @click="showTypeOf">查看类型</button>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: '0'
+                }
+            },
+            methods: {
+                showTypeOf(){
+                    console.log(typeof this.message);
+                }
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

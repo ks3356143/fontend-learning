@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <!-- 1.绑定textarea -->
+        <textarea name="" id="" cols="30" rows="10" v-model="intro" placeholder="请输入.."></textarea>
+        <h2>自我介绍：{{ intro }}</h2>
+        <!-- 2.绑定checkbox -->
+        <!-- 2.1绑定单选框 -->
+        <label for="checkbox1">
+            <input id="checkbox1" type="checkbox" v-model="agree">同意协议
+        </label>
+        <h2>{{ agree }}</h2>
+        <!-- 2.2绑定多选框 -->
+        <label for="female">
+            <input id="female" type="checkbox" v-model="gender" value="男">男
+        </label>
+        <label for="male">
+            <input id="male" type="checkbox" v-model="gender" value="女">女
+        </label>
+        <h2>{{gender}}</h2>
+        <!-- 3.radio -->
+        <h2>请选你水果</h2>
+        <label for="banana">
+            <input id="banana" type="radio" v-model="fruit" value="banana">香蕉
+        </label>
+        <label for="apple">
+            <input id="apple" type="radio" v-model="fruit" value="apple">苹果
+        </label>
+        <label for="tennis">
+            <input id="tennis" type="radio" v-model="fruit" value="tennis">网球
+        </label>
+
+        <h2>{{fruit}}</h2>
+
+
+        <!-- 4.绑定select -->
+        <select name="" id="" v-model="last" multiple>
+            <option value="apple">苹果</option>
+            <option value="banana">香蕉</option>
+            <option value="tennis">网球</option>
+        </select>
+        <h2>{{last}}</h2>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    intro: '请输入自我介绍',
+                    agree: false,
+                    gender:[],
+                    fruit:'',
+                    last:''
+
+                }
+            },
+            methods: {
+
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

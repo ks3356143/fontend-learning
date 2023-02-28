@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <input type="text" v-model="message">
+        <h2>{{ message }}</h2>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    message: ""
+                }
+            },
+            methods: {
+                
+            },
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
