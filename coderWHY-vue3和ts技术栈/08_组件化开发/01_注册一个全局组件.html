@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>代码片段</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <div id="app"></div>
+    <template id="my-app">
+        <h2>我是标题</h2>
+        <p>我是内容，哈哈哈哈哈</p>
+        <component-a></component-a>
+        <componentName></componentName>
+    </template>
+
+    <template id="component-1">
+        <h2>我是组件1号</h2>
+    </template>
+
+    <template id="component-2">
+        <h2>我是组件2号</h2>
+    </template>
+    <script>
+        const app = Vue.createApp({
+            template: "#my-app",
+            data: () => {
+                return {
+                    
+                }
+            },
+            methods: {
+                
+            },
+        })
+        app.component('component-a',{ // 注册的组件可以在任何模板中使用，不只是app根组件
+            template:'#component-1'
+        })
+        app.component('componentName',{ // 注册的组件可以在任何模板中使用，不只是app根组件
+            template:'#component-2'
+        })
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
