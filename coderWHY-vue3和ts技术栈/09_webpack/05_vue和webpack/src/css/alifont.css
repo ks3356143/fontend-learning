@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'myFont1';
+    src: url('../font/Alimama_DongFangDaKai_Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'myFont2';
+    src: url('../font/Alimama_DongFangDaKai_Regular.otf') format('otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'myFont3';
+    src: url('../font/Alimama_DongFangDaKai_Regular.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'myFont4';
+    src: url('../font/Alimama_DongFangDaKai_Regular.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.hello1 {
+    color: red;
+    font-family: 'myFont1';
+}
+
+.hello2 {
+    color: blue;
+    font-family: 'myFont2';
+}
+
+.hello3 {
+    color: pink;
+    font-family: 'myFont3';
+}
