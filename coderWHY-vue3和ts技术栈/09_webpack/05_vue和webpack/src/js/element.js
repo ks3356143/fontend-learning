@@ -26,3 +26,5 @@ document.body.appendChild(divEl)
 document.body.appendChild(bgDivEle)
 document.body.appendChild(imgEl)
 document.body.appendChild(iEl)
+
+console.log("看我element.js热替换了吗？！");

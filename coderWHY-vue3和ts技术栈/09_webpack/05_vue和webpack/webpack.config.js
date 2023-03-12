@@ -1,14 +1,15 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {DefinePlugin} = require('webpack')
+const { DefinePlugin } = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const {VueLoaderPlugin} = require('vue-loader/dist/index')
+const { VueLoaderPlugin } = require("vue-loader/dist/index")
 
 module.exports = {
+    target: "web",
+    devtool: 'source-map', //主要是一种映射关系
+    mode: 'development', //还有production用于生产环境
     entry: "./src/index.js",
-    devtool:"source-map",
-    mode: 'development',// 'production', // 可以使用production和development，两者打包的js文件不一样，production打包的js只有一行了！
     output: {
         // 必须写绝对路径,我们用到node模块,path.resolve可以拼接[node知识以后再说]
         path: path.resolve(__dirname, 'dist'),
@@ -20,17 +21,23 @@ module.exports = {
             arrowFunction: false,
         }
     },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'public')
+        },
+        hot: true,
+    },
     // 在模块module.rules数组里面，配置规则，规则数组里面是对象{}
     module: {
         rules: [
             {
                 test: /\.(less|css)/,
                 use: [
-                    { loader: 'style-loader' }, { loader: 'css-loader' },{
-                        loader:'postcss-loader',
-                        options:{
-                            postcssOptions:{
-                                plugins:[
+                    { loader: 'style-loader' }, { loader: 'css-loader' }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
                                     require('postcss-preset-env')
                                 ]
                             },
@@ -51,43 +58,44 @@ module.exports = {
             },
             {
                 test: /\.(otf|eot|ttf|woff|woff2?)$/,
-                type:'asset/resource', //一般字体文件不进行base64编码插入到js中
-                generator:{
-                    filename:'font/[name]_[hash:10][ext]'
+                type: 'asset/resource', //一般字体文件不进行base64编码插入到js中
+                generator: {
+                    filename: 'font/[name]_[hash:10][ext]'
                 },
                 exclude: /node-modules/
             },
             {
-                test:/\.js$/i,
-                use:'babel-loader',
-                exclude:/node-modules/
+                test: /\.js$/,
+                use: "babel-loader",
+                exclude: /node-modules/
             },
             {
-                test:/\.vue$/i,
-                use:'vue-loader',
-                exclude:/node-modules/
+                test: /\.vue$/i,
+                use: [
+                    "vue-loader"
+                ],
+                exclude: /node-modules/
             },
         ]
     },
-    plugins:[
+    plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template:'./public/index.html',
-            title:'哈哈哈'
+            template: './public/index.html',
+            title: '你是猪儿我是飞！'
         }),
         new DefinePlugin({
-            // 定义变量名用于EJS
-            BASE_URL:"'./'"
+            BASE_URL: "'./'",
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false
         }),
         new CopyWebpackPlugin({
-            patterns:[ //匹配多个文件夹到文件夹
+            patterns: [
                 {
-                    from:"public", // 从哪里复制
-                    to:'./',
-                    globOptions:{
-                        ignore:[
-                            "**/index.html"
-                        ]
+                    from: './public',
+                    to: './',
+                    globOptions: {
+                        ignore: '**/index.html'
                     }
                 }
             ]

@@ -1,18 +1,20 @@
 <template>
     <div>
-        <h2>{{ title }}</h2>
+        <h2>{{title}}</h2>
     </div>
 </template>
 
 <script>
+console.log('123');
 export default {
-    data() {
+    data(){
         return {
-            title: '我是子组件hello'
+            title:"我是子组件"
         }
-    },
+    }
 }
-
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+
+</style>
