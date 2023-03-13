@@ -19,7 +19,7 @@ const str1 = '你是猪'
 console.log(str1);
 //引入vue
 import {createApp} from 'vue/dist/vue.esm-bundler.js'
-import App from './vue/App.vue'
+import App from './vue/App'
 
 const app = createApp(App)
 app.mount('#app')
@@ -27,3 +27,11 @@ app.mount('#app')
 //webpack-dev-server
 console.log('webpack-dev-server!!');
 console.log('webpack-dev-server!!');
+
+//导入axios库
+import axios from 'axios';
+axios.get("http://localhost:8888/moment").then(res=>{
+    console.log(res);
+}).catch(err=>{
+    console.log(err);
+})

@@ -20,11 +20,18 @@ module.exports = {
             {
                 test:/\.css$/, //根据正则表达式匹配
                 use:[
-                    {loader:'style-loader'},{loader:"css-loader"} // 先用css-loader提取css，然后用style-loader创建html<style>标签插入
+                    {loader:'style-loader'},{loader:"css-loader"},// 先用css-loader提取css，然后用style-loader创建html<style>标签插入
+                    {loader:'postcss-loader'}
+                ],
+                exclude:/node-modules/
+            },
+            {
+                test:/\.less$/i, // i表示忽略大小写
+                use:[
+                    {loader:'style-loader'},{loader:'css-loader'},{loader:'less-loader'}
                 ],
                 exclude:/node-modules/
             },
         ]
     }
-
 }

@@ -26,6 +26,26 @@ module.exports = {
             directory: path.join(__dirname, 'public')
         },
         hot: true,
+        // host: "192.168.0.5",
+        port:8000,
+        open:true,
+        compress:true, //默认是false
+        proxy:{
+            "/api":{
+                target:"http://localhost:8888",
+                pathRewrite:{
+                    "^/api":"" //重写为空的，正则匹配原理
+                },
+                secure:false,
+                changeOrigin:true,
+            }
+        },
+    },
+    resolve:{
+        extensions:['.js','.json','.mjs','.vue','.ts','.tsx','.jsx'],
+        alias:{
+            "@":path.resolve(__dirname,"./src")
+        }
     },
     // 在模块module.rules数组里面，配置规则，规则数组里面是对象{}
     module: {

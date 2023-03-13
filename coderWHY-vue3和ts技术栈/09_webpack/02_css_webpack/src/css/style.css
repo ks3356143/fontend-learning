@@ -1,5 +1,6 @@
 .title{
-    color: red;
+    color: #12345678;
     font-weight: 600;
     font-size: 30px;
+    user-select: none;
 }
