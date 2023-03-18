@@ -1,15 +1,13 @@
 <template>
     <div>
-        <ShowMessage title="哈哈哈1" content="我是hahah-one"></ShowMessage>
-        <ShowMessage title="哈哈哈2" content="我是hahah-two"></ShowMessage>
-        <ShowMessage title="哈哈哈3" content="我是hahah-three"></ShowMessage>
-        <ShowMessage :title="title" :content="content"></ShowMessage>
-        <ShowMessage :="message"></ShowMessage>
+        <ShowMessage class='123' class2="321" title="哈哈哈1" content="我是hahah-one"></ShowMessage>
+        <MultRootElement id="aaa"></MultRootElement>
     </div>
 </template>
 
 <script>
 import ShowMessage from './ShowMessage.vue';
+import MultRootElement from './MultRootElement.vue';
 export default {
     data() {
         return {
@@ -21,7 +19,7 @@ export default {
             }
         };
     },
-    components: { ShowMessage }
+    components: { ShowMessage,MultRootElement }
 }
 </script>
 
