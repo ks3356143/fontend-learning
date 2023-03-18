@@ -20,6 +20,6 @@ import mul from './ts/mult'
 console.log(mul(20,30));
 
 //对vue的支持
-import {createApp} from 'vue/dist/vue.esm-browser'
+import {createApp} from 'vue'
 import App from './vue/App.vue'
 createApp(App).mount('#app')
