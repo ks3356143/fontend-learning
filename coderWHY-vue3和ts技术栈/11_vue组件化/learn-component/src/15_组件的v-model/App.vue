@@ -1,23 +1,15 @@
 <template>
     <div>
-        <!-- 绑定两个v-model -->
-        <HyInput v-model="message" v-model:title="title"></HyInput>
+        <HyInput v-model="message"></HyInput>
         <h2>{{ message }}</h2>
-        <h2>{{ title }}</h2>
     </div>
 </template>
 
-<script>
-import HyInput from './HyInput.vue'
-export default {
-    components: { HyInput },
-    data() {
-        return {
-            message: 'input的显示',
-            title: ''
-        }
-    },
-}
+<script setup>
+import { ref } from 'vue'
+import HyInput from './HyInput.vue';
+const message = ref("父组件默认message")
+
 </script>
 
 <style scoped></style>

@@ -7,9 +7,9 @@
 <script>
 import Hello from './Hello'
 export default {
-    components:{
-            Hello:Hello
-        },
+    components: {
+        Hello: Hello
+    },
     data: function () {
         return {
             title: '我是根节点的vue根组件'
