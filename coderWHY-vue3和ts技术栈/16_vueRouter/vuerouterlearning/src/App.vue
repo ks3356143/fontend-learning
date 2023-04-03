@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <h2>HAHAHA</h2>
+        <router-link to="/home" replace active-class="red">首页</router-link>
+        <router-link to="/about" replace active-class="red">关于</router-link>
         <router-view></router-view>
-        <div>呵呵呵</div>
     </div>
 </template>
 
@@ -10,4 +10,8 @@
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.red{
+    color: red;
+}
+</style>

@@ -5,22 +5,13 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ShowMessage from './ShowMessage.vue';
 import MultRootElement from './MultRootElement.vue';
-export default {
-    data() {
-        return {
-            title:"嘻嘻嘻",
-            content:"我是嘻嘻嘻s",
-            message:{
-                title:'黑',
-                content:'我是黑'
-            }
-        };
-    },
-    components: { ShowMessage,MultRootElement }
-}
+import { provide, ref } from 'vue';
+
+const message = ref("是我父组件提供的")
+provide("message", message)
 </script>
 
 <style scoped></style>

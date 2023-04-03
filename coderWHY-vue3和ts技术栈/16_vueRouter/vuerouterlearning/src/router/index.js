@@ -1,20 +1,19 @@
-import Home from '../pages/Home.vue'
-import About from '../pages/About.vue'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
 const routes = [
+    { path: "/", redirect: "/home" },
     {
-        path: '/home', component: Home
+        path: '/home', component: () => import(/* webpackChunkNmae:'home-chunk' */'../pages/Home.vue')
     },
     {
-        path: '/about', component: About
+        path: '/about', component: () => import(/* webpackChunkName:'about-chunk' */'../pages/About.vue')
     }
 ]
 
 // 创建路由对象
 const router = createRouter({
     routes,
-    history: createWebHashHistory(),
+    history: createWebHistory(),
 })
 
 // 安装路由对象
