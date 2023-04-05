@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>About路由组件</h2>
+        <h2>HomeMoment二级路由组件</h2>
     </div>
 </template>
 

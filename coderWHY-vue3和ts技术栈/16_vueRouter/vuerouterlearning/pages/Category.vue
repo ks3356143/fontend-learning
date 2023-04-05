@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        <h2>Category页面</h2>
     </div>
 </template>
 
@@ -8,4 +8,4 @@
 
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
