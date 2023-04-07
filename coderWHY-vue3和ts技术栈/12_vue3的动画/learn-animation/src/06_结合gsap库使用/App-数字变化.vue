@@ -1,28 +1,23 @@
 <template>
     <div>
-        <input type="number" step="100" v-model="counter" @input="input">
-        <h2>当前数字：{{ showCounter.toFixed(0) }}</h2>
+        <input type="number" step="100" v-model="counter">
+        <h2>当前数字：{{ showCounter.toFixed() }}</h2>
     </div>
 </template>
 
-<script>
+<script setup>
 import gsap from 'gsap'
-export default {
-    data() {
-        return {
-            counter: 0,
-            showCounter: 0
-        }
-    },
-    methods: {
-        input() {
-            gsap.to(this, {
-                showCounter: this.counter,
-                duration: 0.5
-            })
-        }
-    }
-}
+import { ref, watch } from 'vue'
+const counter = ref(0)
+const showCounter = ref(0)
+
+watch(counter, (newValue, oldValue) => {
+    gsap.to(showCounter,{
+        value:counter.value,
+        duration:1
+    })
+})
+
 </script>
 
 <style scoped>

@@ -7,33 +7,33 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isShow: true
-        }
-    },
-}
+<script setup>
+import { ref } from 'vue'
+const isShow = ref(true)
 </script>
 
 <style scoped>
-.v-enter-from{
+.v-enter-from {
     opacity: 0;
 }
-.v-enter-active{
+
+.v-enter-active {
     transition: opacity 1s ease-in-out;
 }
-.v-enter-to{
+
+.v-enter-to {
     opacity: 1;
 }
-.v-leave-from{
+
+.v-leave-from {
     opacity: 1;
 }
-.v-leave-active{
+
+.v-leave-active {
     transition: opacity 1s;
 }
-.v-leave-to{
+
+.v-leave-to {
     opacity: 0;
 }
 </style>

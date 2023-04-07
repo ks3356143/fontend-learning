@@ -1,20 +1,15 @@
 <template>
     <div>
         <button @click="isShow = !isShow">显示/隐藏</button>
-        <transition type="animation" :duration="1000">
+        <transition type="animation" appear>
             <h2 class="title" v-if="isShow">Hello World</h2>
         </transition>
     </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            isShow: true
-        }
-    },
-}
+import {ref} from 'vue'
+const isShow = ref(true)
 </script>
 
 <style scoped>
