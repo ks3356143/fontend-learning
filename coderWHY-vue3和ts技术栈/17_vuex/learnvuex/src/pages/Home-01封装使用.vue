@@ -13,7 +13,7 @@ import { useState } from '../hooks/useState.js'
 export default {
     setup() {
         // 我最后达到效果是，拿到state全部数据
-        const storeState = useState(['name','counter'])
+        const storeState = useState(['name', 'counter'])
 
 
         return {

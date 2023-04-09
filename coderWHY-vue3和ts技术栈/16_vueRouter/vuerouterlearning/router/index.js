@@ -50,9 +50,7 @@ router.addRoute("home", {
 // 导航守卫-进行了一次路由跳转
 let count = 0
 router.beforeEach((to, from) => {
-    if(to.path.indexOf("/home") !== -1){
-        return '/login'
-    }
+    
 })
 
 export default router
