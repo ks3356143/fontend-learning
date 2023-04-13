@@ -1,8 +1,9 @@
 {
-  "useTabs": false,
-  "tabWidth": 2,
-  "printWidth": 80,
-  "singleQuote": false,
-  "trailingComma": "none",
-  "semi": false
+    "useTabs": false,
+    "tabWidth": 4,
+    "printWidth": 160,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "semi": false,
+    "htmlWhitespaceSensitivity": "ignore"
 }
