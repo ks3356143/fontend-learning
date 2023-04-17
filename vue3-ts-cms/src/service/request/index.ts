@@ -16,7 +16,7 @@ class chenRequest {
             this.interceptors?.responseInterceptor,
             this.interceptors?.responseInterceptorCatch
         )
-        // 添加所有实例都拦截不会被单独顶替
+        // 添加所有实例都拦截
         this.instance.interceptors.request.use(
             (config) => {
                 console.log("所有实例请求成功均要拦截，不会被替换")
