@@ -23,7 +23,19 @@ import chenRequest from "@/service"
 //         }
 //     }
 // })
-chenRequest.request({
-    method: "GET",
-    url: "/home/multidata"
-})
+interface DataType {
+    data: any
+    returnCode: string
+    success: boolean
+}
+
+chenRequest
+    .get<DataType>({
+        url: "/home/multidata",
+        showLoading: true //可以觉得现实LOADING或者不显示
+    })
+    .then((res) => {
+        console.log(res.data)
+        console.log(res.returnCode)
+        console.log(res.success)
+    })
