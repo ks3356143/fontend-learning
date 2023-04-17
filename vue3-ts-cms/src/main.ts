@@ -9,17 +9,21 @@ createApp(App).use(router).use(store).mount("#app")
 
 // 简单使用封装
 import chenRequest from "@/service"
+// chenRequest.request({
+//     url: "/home/multidata",
+//     method: "GET",
+//     interceptors: {
+//         requestInterceptor: (config) => {
+//             console.log("单独的请求config")
+//             return config
+//         },
+//         responseInterceptor: (res) => {
+//             console.log("单独响应的response")
+//             return res
+//         }
+//     }
+// })
 chenRequest.request({
-    url: "/home/multidata",
     method: "GET",
-    interceptors: {
-        requestInterceptor: (config) => {
-            console.log("单独的请求config")
-            return config
-        },
-        responseInterceptor: (res) => {
-            console.log("单独响应的response")
-            return res
-        }
-    }
+    url: "/home/multidata"
 })

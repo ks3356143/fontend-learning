@@ -4,8 +4,11 @@
         <router-link to="/main">首页</router-link>
         <router-view />
         <el-button>哈哈哈</el-button>
+        <el-button type="success">哈哈哈</el-button>
         <el-button type="primary">哈哈哈</el-button>
         <el-button type="danger">哈哈哈</el-button>
+        <el-button type="info">哈哈哈</el-button>
+        <el-button type="warning">哈哈哈</el-button>
     </div>
 </template>
 <script lang="ts">

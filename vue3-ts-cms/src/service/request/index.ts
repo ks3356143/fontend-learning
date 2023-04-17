@@ -1,10 +1,15 @@
 import axios from "axios"
 import type { AxiosInstance } from "axios"
 import type { chenRequestInterceptor, ChenRequestConfig } from "@/service/request/types"
+import { ElLoading } from "element-plus"
+
+//按需引入有bug，需要css
+import "element-plus/theme-chalk/el-loading.css"
 
 class chenRequest {
     instance: AxiosInstance
     interceptors?: chenRequestInterceptor
+    loading?: any
     constructor(config: ChenRequestConfig) {
         this.instance = axios.create(config)
         this.interceptors = config.interceptors
@@ -19,21 +24,35 @@ class chenRequest {
         // 添加所有实例都拦截
         this.instance.interceptors.request.use(
             (config) => {
-                console.log("所有实例请求成功均要拦截，不会被替换")
+                console.log("所有实例请求成功均要拦截")
+                this.loading = ElLoading.service({
+                    lock: true, //需要蒙板不？
+                    text: "正在请求数据...",
+                    background: "rgba(0,0,0,0.5)"
+                })
                 return config
             },
             (err) => {
-                console.log("所有实例请求错误拦截，不会被替换")
+                console.log("所有实例请求错误拦截")
                 return err
             }
         )
         this.instance.interceptors.response.use(
             (res) => {
-                console.log("所有实例响应成功均要拦截，不会被替换")
-                return res
+                console.log("所有实例响应成功均要拦截")
+                this.loading?.close()
+                const data = res.data
+                if (data.returnCode === "-1001") {
+                    console.log("-1001错误")
+                } else {
+                    return res.data
+                }
             },
             (err) => {
-                console.log("所有实例响应错误拦截，不会被替换")
+                console.log("所有实例响应错误拦截")
+                if (err.response.status === "404") {
+                    console.log("404错误")
+                }
                 return err
             }
         )

@@ -5,6 +5,15 @@ export default new chenRequest({
     timeout: process.env.VUE_APP_TIME_OUT,
     interceptors: {
         requestInterceptor: (config) => {
+            // 携带token的拦截
+            const token = "" //一般从vuex获取
+            if (token) {
+                if (!config?.headers) {
+                    throw new Error("headers有可能为undefinedi")
+                }
+                config.headers.Authorization = `Bearer ${token}`
+            }
+
             console.log("所有axios实例请求成功的拦截")
             return config
         },
