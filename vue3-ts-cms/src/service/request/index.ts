@@ -1,9 +1,8 @@
 import axios from "axios"
 import type { AxiosInstance } from "axios"
 import type { chenRequestInterceptor, ChenRequestConfig } from "@/service/request/types"
+// 从ElementPlus引入ElLoading对象，其中有自定义指令和server方式调用
 import { ElLoading } from "element-plus"
-
-// 按需引入有bug，需要css
 import "element-plus/theme-chalk/el-loading.css"
 
 class chenRequest {
@@ -12,14 +11,14 @@ class chenRequest {
     showLoading: boolean
     loading?: any
     constructor(config: ChenRequestConfig) {
-        // 创建axios实例
         this.instance = axios.create(config)
-        // 保存基本信息
+        // 保存实例拦截器信息
         this.interceptors = config.interceptors
+        // 保存调用是否需要转圈
         this.showLoading = config.showLoading ?? true
 
         // 使用拦截器
-        // 1.从config中取出拦截去时对应的实力拦截器
+        // 1.从config中取出拦截去时对应的实例拦截器
         this.instance.interceptors.request.use(
             this.interceptors?.requestInterceptor,
             this.interceptors?.requestInterceptorCatch
@@ -28,7 +27,7 @@ class chenRequest {
             this.interceptors?.responseInterceptor,
             this.interceptors?.responseInterceptorCatch
         )
-        // 2.添加所有实例都拦截
+        // 2.添加所有实例-全局都拦截
         this.instance.interceptors.request.use(
             (config) => {
                 console.log("所有实例请求成功均要拦截")
@@ -70,14 +69,14 @@ class chenRequest {
         )
     }
 
-    request<T>(config: ChenRequestConfig): Promise<T> {
+    request<T>(config: ChenRequestConfig<T>): Promise<T> {
         return new Promise((resolve, reject) => {
-            // 单个请求对config的处理
+            // 对请求中传参的拦截器进行单独拦截
             if (config.interceptors?.requestInterceptor) {
                 config = config.interceptors.requestInterceptor(config)
             }
 
-            // 判断是否显示LOADING
+            // 判断是否显示LOADING，默认为true，如果传参false则改为false
             if (config.showLoading === false) {
                 this.showLoading = config.showLoading
             }
@@ -85,11 +84,11 @@ class chenRequest {
             this.instance
                 .request<any, T>(config)
                 .then((res) => {
-                    // 1.单个请求对数据的处理
+                    // 1.单独调用是的拦截器处理
                     if (config.interceptors?.responseInterceptor) {
                         res = config.interceptors.responseInterceptor(res)
                     }
-                    // 2.注意每次穿过来showLoading需要初始化，不然下次请求就嗝屁没LOADINGs了
+                    // 2.注意每次传过来showLoading需要初始化，不然下次请求就嗝屁没LOADING了
                     this.showLoading = true
 
                     // 3.将我们结果resolve返回出去
@@ -102,16 +101,16 @@ class chenRequest {
         })
     }
 
-    get<T>(config: ChenRequestConfig): Promise<T> {
+    get<T>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "GET" })
     }
-    post<T>(config: ChenRequestConfig): Promise<T> {
+    post<T>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "POST" })
     }
-    delete<T>(config: ChenRequestConfig): Promise<T> {
+    delete<T>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "DELETE" })
     }
-    patch<T>(config: ChenRequestConfig): Promise<T> {
+    patch<T>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "PATCH" })
     }
 }

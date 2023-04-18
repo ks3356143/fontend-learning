@@ -1,5 +1,5 @@
 import { createApp } from "vue"
-
+// 如果需要全局导入elementPlus则可取消以下两行注释
 // import ElementPlus from "element-plus"
 // import "element-plus/dist/index.css"
 import App from "@/App.vue"
@@ -7,7 +7,7 @@ import router from "@/router/index"
 import store from "@/store/index"
 createApp(App).use(router).use(store).mount("#app")
 
-// 简单使用封装
+// 以下是配置单独拦截器，共两个，注释代码为例示
 import chenRequest from "@/service"
 // chenRequest.request({
 //     url: "/home/multidata",
@@ -23,6 +23,8 @@ import chenRequest from "@/service"
 //         }
 //     }
 // })
+
+// DataType用来定义返回数据的res<DataType>格式
 interface DataType {
     data: any
     returnCode: string
@@ -35,7 +37,7 @@ chenRequest
         showLoading: true //可以觉得现实LOADING或者不显示
     })
     .then((res) => {
-        console.log(res.data)
-        console.log(res.returnCode)
-        console.log(res.success)
+        console.log("获取返回的data：", res.data)
+        console.log("获取axios返回的returnCode：", res.returnCode)
+        console.log("获取axios返回的success字段：", res.success)
     })
