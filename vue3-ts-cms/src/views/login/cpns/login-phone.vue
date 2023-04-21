@@ -2,10 +2,13 @@
     <div class="login-phone">
         <el-form label-width="60px" :model="account" :rules="rules">
             <el-form-item label="账号" prop="name">
-                <el-input v-model="account.name"></el-input>
+                <el-input v-model="account.name" clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-                <el-input v-model="account.password"></el-input>
+                <div class="get-code">
+                    <el-input v-model="account.password" clearable class="pwdClass" show-password></el-input>
+                    <el-button type="primary">获取验证码</el-button>
+                </div>
             </el-form-item>
         </el-form>
     </div>
@@ -13,6 +16,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue"
+import { rules } from "@/views/login/config/account-config"
 
 export default defineComponent({
     name: "login-phone",
@@ -21,35 +25,19 @@ export default defineComponent({
             name: "",
             password: ""
         })
-        const rules = {
-            name: [
-                {
-                    required: true,
-                    message: "您的用户名为必填内容", // 验证失败的提示
-                    trigger: "blur" // 失去焦点开始验证
-                },
-                {
-                    pattern: /^[a-z0-9]{5,10}&/,
-                    message: "用户名必须是5~10个字母或数字",
-                    trigger: "blur"
-                }
-            ],
-            password: [
-                {
-                    required: true,
-                    message: "密码为必填内容", // 验证失败的提示
-                    trigger: "blur" // 失去焦点开始验证
-                },
-                {
-                    pattern: /^[a-z0-9]{3,20}$/, // 3个以上是逗号，逗号后面不写
-                    message: "用户名必须是3个以上20个以下字母或数字",
-                    trigger: "blur"
-                }
-            ]
-        }
+
         return { rules, account }
     }
 })
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.get-code {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.pwdClass {
+    width: 230px; //给一个宽度，不然两个元素靠在一起
+}
+</style>

@@ -30,7 +30,7 @@ class chenRequest {
         // 2.添加所有实例-全局都拦截
         this.instance.interceptors.request.use(
             (config) => {
-                console.log("所有实例请求成功均要拦截")
+                // 所有实例请求成功均要拦截
                 if (this.showLoading) {
                     this.loading = ElLoading.service({
                         lock: true, //需要蒙板不？
@@ -42,13 +42,13 @@ class chenRequest {
                 return config
             },
             (err) => {
-                console.log("所有实例请求错误拦截")
+                // 所有实例请求错误拦截
                 return err
             }
         )
         this.instance.interceptors.response.use(
             (res) => {
-                console.log("所有实例响应成功均要拦截")
+                // 所有实例响应成功均要拦截
                 //延迟下观看
                 this.loading?.close()
 
@@ -60,7 +60,7 @@ class chenRequest {
                 }
             },
             (err) => {
-                console.log("所有实例响应错误拦截")
+                // 所有实例响应错误拦截
                 if (err.response.status === "404") {
                     console.log("404错误")
                 }

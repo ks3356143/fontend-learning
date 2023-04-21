@@ -14,19 +14,19 @@ export default new chenRequest({
                 config.headers.Authorization = `Bearer ${token}`
             }
 
-            console.log("所有axios实例请求成功的拦截")
+            // 所有axios实例请求成功的拦截
             return config
         },
         requestInterceptorCatch(err) {
-            console.log("所有axios实例请求err的拦截")
+            // "所有axios实例请求err的拦截"
             return err
         },
         responseInterceptor: (res) => {
-            console.log("所有axios实例响应成功的拦截")
+            // "所有axios实例响应成功的拦截"
             return res
         },
         responseInterceptorCatch(err) {
-            console.log("所有axios实例响应err的拦截")
+            // "所有axios实例响应err的拦截"
             return err
         }
     }

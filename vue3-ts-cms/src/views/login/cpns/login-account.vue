@@ -1,54 +1,59 @@
 <template>
     <div class="login-account">
-        <el-form label-width="60px" :rules="rules" :model="account">
+        <el-form label-width="60px" :rules="rules" :model="account" ref="formRef">
             <el-form-item label="账号" prop="name">
-                <el-input v-model="account.name"></el-input>
+                <el-input v-model="account.name" clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-                <el-input v-model="account.password"></el-input>
+                <el-input v-model="account.password" show-password clearable></el-input>
             </el-form-item>
         </el-form>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue"
+import { defineComponent, reactive, ref } from "vue"
+import { rules } from "@/views/login/config/account-config"
+import { ElForm, ElMessage } from "element-plus"
+import "element-plus/theme-chalk/el-message.css"
+import localCache from "@/utils/cache"
+import { useStore } from "vuex"
 
 export default defineComponent({
     name: "login-account",
     setup() {
+        //获取vuex仓库
+        const store = useStore()
         const account = reactive({
-            name: "",
-            password: ""
+            name: localCache.getCache("name") ?? "",
+            password: localCache.getCache("password") ?? ""
         })
-        // 编写规则
-        const rules = {
-            name: [
-                {
-                    required: true,
-                    message: "您的用户名为必填内容", // 验证失败的提示
-                    trigger: "blur" // 失去焦点开始验证
-                },
-                {
-                    pattern: /^[a-z0-9]{5,10}$/,
-                    message: "用户名必须是5~10个字母或数字",
-                    trigger: "blur"
+        const formRef = ref<InstanceType<typeof ElForm>>()
+        const loginAction = (isKeepPwd: boolean) => {
+            formRef.value?.validate((valid) => {
+                if (valid) {
+                    // 1.判断是否记住密码
+                    if (isKeepPwd) {
+                        // 本地缓存
+                        localCache.setCache("name", account.name)
+                        localCache.setCache("password", account.password)
+                    } else {
+                        localCache.deleteCache("name")
+                        localCache.deleteCache("password")
+                    }
+                    // 2.登录逻辑
+                    store.dispatch("login/accountLoginAction", { ...account })
+                } else {
+                    ElMessage({
+                        showClose: true,
+                        message: "请检查账号密码是否规范！",
+                        type: "error"
+                    })
                 }
-            ],
-            password: [
-                {
-                    required: true,
-                    message: "密码为必填内容", // 验证失败的提示
-                    trigger: "blur" // 失去焦点开始验证
-                },
-                {
-                    pattern: /^[a-z0-9]{3,20}$/, // 3个以上是逗号，逗号后面不写
-                    message: "用户名必须是3个以上20个以下字母或数字",
-                    trigger: "blur"
-                }
-            ]
+            })
         }
-        return { account, rules }
+
+        return { account, rules, formRef, loginAction }
     }
 })
 </script>
