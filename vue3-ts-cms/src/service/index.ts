@@ -1,8 +1,9 @@
 // service统一出口，用来创建我们封装的axios实例并传入默认参数和拦截器
 import chenRequest from "@/service/request/index"
+import { BASE_URL, TIME_OUT } from "@/service/request/config"
 export default new chenRequest({
-    baseURL: process.env.VUE_APP_BASE_URL,
-    timeout: process.env.VUE_APP_TIME_OUT,
+    baseURL: BASE_URL,
+    timeout: TIME_OUT,
     interceptors: {
         requestInterceptor: (config) => {
             // 携带token的拦截，一般从vuex获取

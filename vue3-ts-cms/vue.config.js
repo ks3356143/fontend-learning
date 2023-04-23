@@ -7,8 +7,9 @@ module.exports = defineConfig({
     publicPath: "/",
     outputDir: "dist",
     devServer: {
-        port: 8088,
-        open: true
+        host: "localhost",
+        port: 8055,
+        open: true // 启动打开浏览器
     },
     // configureWebpack: {
     //     plugins: [

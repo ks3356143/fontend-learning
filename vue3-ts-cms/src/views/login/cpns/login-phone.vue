@@ -17,16 +17,20 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue"
 import { rules } from "@/views/login/config/account-config"
+import { useStore } from "vuex"
 
 export default defineComponent({
     name: "login-phone",
     setup() {
+        const store = useStore()
         const account = reactive({
             name: "",
             password: ""
         })
-
-        return { rules, account }
+        const registerAction = () => {
+            store.dispatch("login/phoneLoginAction", account)
+        }
+        return { rules, account, registerAction }
     }
 })
 </script>

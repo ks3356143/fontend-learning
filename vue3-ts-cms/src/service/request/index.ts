@@ -38,7 +38,6 @@ class chenRequest {
                         background: "rgba(0,0,0,0.5)"
                     })
                 }
-
                 return config
             },
             (err) => {
@@ -51,13 +50,9 @@ class chenRequest {
                 // 所有实例响应成功均要拦截
                 //延迟下观看
                 this.loading?.close()
-
                 const data = res.data
-                if (data.returnCode === "-1001") {
-                    console.log("-1001错误")
-                } else {
-                    return res.data
-                }
+                // 这里可以处理returnCode
+                return data
             },
             (err) => {
                 // 所有实例响应错误拦截

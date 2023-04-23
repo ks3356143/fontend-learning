@@ -1,7 +1,7 @@
 <template>
     <div class="login-pannel">
         <h1 class="title">成都测评平台</h1>
-        <el-tabs type="border-card" class="demo-tabs" stretch>
+        <el-tabs type="border-card" class="demo-tabs" stretch v-model="currentTab">
             <el-tab-pane>
                 <template #label>
                     <el-icon><UserFilled /></el-icon>
@@ -14,7 +14,7 @@
                     <el-icon><Message /></el-icon>
                     账号注册
                 </template>
-                <login-phone></login-phone>
+                <login-phone ref="phoneRef"></login-phone>
             </el-tab-pane>
         </el-tabs>
         <div class="pwdChange">
@@ -24,7 +24,10 @@
                 忘记密码
             </el-link>
         </div>
-        <el-button type="primary" class="login-btn" @click="handleLoginClick">立即登录</el-button>
+        <el-button v-if="currentTab === '0'" type="primary" class="login-btn" @click="handleLoginClick">
+            立即登录
+        </el-button>
+        <el-button v-else type="primary" class="login-btn" @click="handleRegisterClick">点击注册</el-button>
     </div>
 </template>
 
@@ -38,12 +41,20 @@ export default defineComponent({
     name: "login-pannel",
     components: { Message, UserFilled, LoginAccount, LoginPhone, Lock },
     setup() {
+        //定义是否用户是否记录密码
         const isKeepPwd = ref(false)
+        //拿到login-account.vue组件，以便使用其函数
         const accountRef = ref<InstanceType<typeof LoginAccount>>()
+        const phoneRef = ref<InstanceType<typeof LoginPhone>>()
         const handleLoginClick = () => {
             accountRef.value?.loginAction(isKeepPwd.value)
         }
-        return { isKeepPwd, accountRef, handleLoginClick }
+        const handleRegisterClick = () => {
+            phoneRef.value?.registerAction()
+        }
+        //定义el-tabs的v-model
+        const currentTab = ref<string>("0")
+        return { isKeepPwd, accountRef, handleLoginClick, currentTab, handleRegisterClick }
     }
 })
 </script>
