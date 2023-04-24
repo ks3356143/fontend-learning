@@ -1,18 +1,19 @@
 // service统一出口，用来创建我们封装的axios实例并传入默认参数和拦截器
 import chenRequest from "@/service/request/index"
 import { BASE_URL, TIME_OUT } from "@/service/request/config"
+import localCache from "@/utils/cache"
 export default new chenRequest({
     baseURL: BASE_URL,
     timeout: TIME_OUT,
     interceptors: {
         requestInterceptor: (config) => {
             // 携带token的拦截，一般从vuex获取
-            const token = ""
+            const token = localCache.getCache("token")
             if (token) {
                 if (!config?.headers) {
                     throw new Error("headers有可能为undefinedi")
                 }
-                config.headers.Authorization = `Bearer ${token}`
+                config.headers.Authorization = `${token}`
             }
 
             // 所有axios实例请求成功的拦截

@@ -19,4 +19,9 @@ const store = createStore<IRootState>({
     actions: {}
 })
 
+// 封装一个函数解决用户直接访问main
+export function setupStore() {
+    store.dispatch("login/loadLocalLogin")
+}
+
 export default store

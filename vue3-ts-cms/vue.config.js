@@ -9,7 +9,16 @@ module.exports = defineConfig({
     devServer: {
         host: "localhost",
         port: 8055,
-        open: true // 启动打开浏览器
+        open: true, // 启动打开浏览器
+        proxy: {
+            "^/api": {
+                pathRewrite: {
+                    "/api": ""
+                },
+                target: "http://127.0.0.1:8000",
+                changeOrigin: true
+            }
+        }
     },
     // configureWebpack: {
     //     plugins: [
