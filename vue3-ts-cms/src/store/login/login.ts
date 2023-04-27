@@ -30,7 +30,7 @@ const loginModule: Module<ILoginState, IRootState> = {
             // 1.实现请求逻辑
             const loginResult = await accountLoginRequest(payload)
             const { id, token } = loginResult.data
-            context.commit("changeTolen", token)
+            context.commit("changeToken", token)
             localCache.setCache("token", token) //储存拿到的token到localCache
             // 2.请求用户信息数据
             const userInfoResult = await requestUserInfoById(id)
