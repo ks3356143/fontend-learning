@@ -1,6 +1,6 @@
-import { createStore } from "vuex"
+import { createStore, Store, useStore as useVuexStore } from "vuex"
 // 导入类型
-import { IRootState } from "@/store/types"
+import { IRootState, IStoreType } from "@/store/types"
 // 其他模块导入
 import loginModule from "@/store/login/login"
 
@@ -22,6 +22,11 @@ const store = createStore<IRootState>({
 // 封装一个函数解决用户直接访问main
 export function setupStore() {
     store.dispatch("login/loadLocalLogin")
+}
+
+// 处理vuex和ts不兼容，无法识别子模块类型
+export function useStore(): Store<IStoreType> {
+    return useVuexStore()
 }
 
 export default store

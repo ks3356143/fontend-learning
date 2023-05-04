@@ -13,7 +13,122 @@ const loginModule: Module<ILoginState, IRootState> = {
     state() {
         return {
             token: "",
-            userInfo: ""
+            userInfo: "",
+            // 这里后面修改为后端返回用户菜单
+            userMenus: [
+                {
+                    children: [
+                        {
+                            children: null,
+                            id: 391,
+                            name: "核心技术1",
+                            parentId: 38,
+                            sort: 106,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        },
+                        {
+                            children: null,
+                            id: 402,
+                            name: "核心技术2",
+                            parentId: 38,
+                            sort: 106,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        }
+                    ],
+                    icon: "Monitor",
+                    id: 41,
+                    name: "系统总览",
+                    sort: 1,
+                    type: 1,
+                    url: "main/analysis"
+                },
+                {
+                    children: [
+                        {
+                            children: null,
+                            id: 403,
+                            name: "子菜单123",
+                            parentId: 42,
+                            sort: 106,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        },
+                        {
+                            children: null,
+                            id: 404,
+                            name: "子菜单321",
+                            parentId: 42,
+                            sort: 107,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        }
+                    ],
+                    icon: "Tools",
+                    id: 42,
+                    name: "系统管理",
+                    sort: 2,
+                    type: 1,
+                    url: "main/manage"
+                },
+                {
+                    children: [
+                        {
+                            children: null,
+                            id: 408,
+                            name: "三级菜单1",
+                            parentId: 43,
+                            sort: 108,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        },
+                        {
+                            children: null,
+                            id: 409,
+                            name: "三级菜单2",
+                            parentId: 43,
+                            sort: 108,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        }
+                    ],
+                    icon: "CirclePlus",
+                    id: 43,
+                    name: "三号",
+                    sort: 3,
+                    type: 1,
+                    url: "main/settings"
+                },
+                {
+                    children: [
+                        {
+                            children: null,
+                            id: 411,
+                            name: "沉思1",
+                            parentId: 44,
+                            sort: 110,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        },
+                        {
+                            children: null,
+                            id: 410,
+                            name: "沉思2",
+                            parentId: 44,
+                            sort: 109,
+                            type: 2,
+                            url: "/main/analysis/overview"
+                        }
+                    ],
+                    icon: "Folder",
+                    id: 44,
+                    name: "陈俊亦私藏",
+                    sort: 4,
+                    type: 1,
+                    url: "main/analysis"
+                }
+            ]
         }
     },
     mutations: {
