@@ -12,11 +12,19 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: "/login",
+        name: "login",
         component: () => import("@/views/login/login.vue")
     },
     {
         path: "/main",
+        name: "main",
         component: () => import("@/views/main/main.vue")
+        // children: [] -> 根据userMenus来决定
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: "not-found",
+        component: () => import("@/views/not-found/not-found.vue")
     }
 ]
 
@@ -25,6 +33,7 @@ const router = createRouter({
     history: createWebHistory()
 })
 
+// 导航守卫
 router.beforeEach((to) => {
     if (to.path !== "/login") {
         const token = localCache.getCache("token")

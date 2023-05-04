@@ -21,7 +21,7 @@
                             <span>{{ item.name }}</span>
                         </template>
                         <template v-for="subitem in item.children" :key="subitem.id">
-                            <el-menu-item :index="subitem.id + ''">
+                            <el-menu-item :index="subitem.id + ''" @click="handleMenuItemClick(subitem)">
                                 <el-icon><component v-if="subitem.icon" :is="subitem.icon"></component></el-icon>
                                 <span>{{ subitem.name }}</span>
                             </el-menu-item>
@@ -45,6 +45,7 @@
 import { defineComponent, computed } from "vue"
 import { Folder, CirclePlus, Tools, Monitor } from "@element-plus/icons-vue"
 import { useStore } from "@/store/index"
+import { useRouter } from "vue-router"
 
 export default defineComponent({
     components: { Folder, CirclePlus, Tools, Monitor },
@@ -54,10 +55,18 @@ export default defineComponent({
             default: false
         }
     },
-    setup(props) {
+    setup() {
         const store = useStore()
         const userMenus = computed(() => store.state.login.userMenus)
-        return { userMenus }
+        // 处理角色路由
+        const router = useRouter()
+        const handleMenuItemClick = (item: any) => {
+            router.push({
+                path: item.url ?? "/not-found"
+            })
+        }
+
+        return { userMenus, handleMenuItemClick }
     }
 })
 </script>
@@ -89,7 +98,6 @@ export default defineComponent({
     .el-sub-menu {
         background-color: #001529 !important;
         .el-menu-item {
-            padding-left: 50px !important;
             background-color: #0e273e;
         }
     }
@@ -101,7 +109,7 @@ export default defineComponent({
         background-color: #2a7cd4;
     }
     .el-menu-item.is-active {
-        color: #fff !important;
+        color: #dcd024 !important;
         background-color: #0a60bd !important;
     }
 }
