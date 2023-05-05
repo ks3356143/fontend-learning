@@ -10,7 +10,7 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
         const route = require("../router/main" + key.split(".")[1])
         allRoutes.push(route.default)
     })
-    // 2.根据菜单获取需要添加的routes
+    // 2.根据菜单获取需要添加的routes，为了实现递归，所以在函数里面定义函数调用
     const _recurseGetRoute = (menus: any[]) => {
         for (const menu of menus) {
             if (menu.type === 2) {
