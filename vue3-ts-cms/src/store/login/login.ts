@@ -183,6 +183,7 @@ const loginModule: Module<ILoginState, IRootState> = {
             // 4.跳转首页
             router.push("/main")
         },
+        // 这个是在main.ts中调用初始化时启动
         loadLocalLogin({ commit }) {
             const token = localCache.getCache("token")
             if (token) {
