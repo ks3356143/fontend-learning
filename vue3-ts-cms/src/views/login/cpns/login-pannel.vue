@@ -1,20 +1,20 @@
 <template>
     <div class="login-pannel">
-        <h1 class="title">成都测评平台</h1>
+        <h1 class="title">成都测评管理平台</h1>
         <el-tabs type="border-card" class="demo-tabs" stretch v-model="currentTab">
-            <el-tab-pane>
+            <el-tab-pane lazy>
                 <template #label>
                     <el-icon><UserFilled /></el-icon>
                     账号登录
                 </template>
-                <login-account ref="accountRef"></login-account>
+                <login-account ref="accountRef" class="animateAccountCustom"></login-account>
             </el-tab-pane>
-            <el-tab-pane>
+            <el-tab-pane lazy>
                 <template #label>
                     <el-icon><Message /></el-icon>
                     账号注册
                 </template>
-                <login-phone ref="phoneRef"></login-phone>
+                <login-phone ref="phoneRef" class="animatePhoneCustom"></login-phone>
             </el-tab-pane>
         </el-tabs>
         <div class="pwdChange">
@@ -88,5 +88,12 @@ export default defineComponent({
 }
 :global(.el-button) {
     border-radius: 0;
+}
+// 添加切换动画
+.animateAccountCustom {
+    animation: fadeInLeftBig 0.5s;
+}
+.animatePhoneCustom {
+    animation: fadeInRightBig 0.5s;
 }
 </style>

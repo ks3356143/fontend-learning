@@ -29,7 +29,7 @@
                     </el-sub-menu>
                 </template>
                 <template v-else-if="item.type === 2">
-                    <el-menu-item :index="item.id + ''">
+                    <el-menu-item :index="item.id + ''" @click="handleMenuItemClick(item)">
                         <el-icon>
                             <component v-if="item.icon" :is="item.icon"></component>
                         </el-icon>
