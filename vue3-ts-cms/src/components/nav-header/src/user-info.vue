@@ -3,7 +3,7 @@
         <div class="userInfo">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <el-text>{{ $store.state.login.userInfo.name }}</el-text>
+                    <el-text>{{ username }}</el-text>
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -24,13 +24,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, computed } from "vue"
 import { ArrowDown, CloseBold } from "@element-plus/icons-vue"
+import { useStore } from "vuex"
 
 export default defineComponent({
     components: { ArrowDown, CloseBold },
     setup() {
-        return {}
+        const store = useStore()
+        // 在右上角显示当前登录用户名
+        const username = computed(() => {
+            return store.state.login.userInfo.name
+        })
+        return { username }
     }
 })
 </script>
@@ -45,5 +51,9 @@ export default defineComponent({
 }
 .el-dropdown-link:focus {
     outline: none; //注意外边框不止boder还有outline,而且不止hover还有focus
+}
+.userInfo {
+    display: flex;
+    align-items: center;
 }
 </style>

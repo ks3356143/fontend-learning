@@ -1,7 +1,12 @@
 <template>
     <div class="nav-menu">
         <div class="logo">
-            <img src="~@/assets/img/wxwx-logo.svg" alt="测评中心主站" />
+            <img
+                src="~@/assets/img/wxwx-logo.svg"
+                alt="测评中心主站"
+                :style="{ width: collapse ? '18px' : '30px' }"
+                class="logo-img"
+            />
             <span v-if="!collapse" class="title">测试管理系统</span>
         </div>
         <el-menu
@@ -65,6 +70,7 @@ export default defineComponent({
                 path: item.url ?? "/not-found"
             })
         }
+        // 动态给LOGO添加样式
 
         return { userMenus, handleMenuItemClick }
     }
@@ -90,6 +96,9 @@ export default defineComponent({
             font-weight: 700;
             color: white;
             height: 200px;
+        }
+        .logo-img {
+            transition: width 0.5s;
         }
     }
     .el-menu {
