@@ -9,7 +9,7 @@
                     <NavHeader @fold-change="handleFoldChange" />
                 </el-header>
                 <el-main class="page-content">
-                    <router-view />
+                    <div class="page-info"><router-view /></div>
                 </el-main>
             </el-container>
         </el-container>
@@ -47,6 +47,10 @@ export default defineComponent({
 }
 .page-content {
     height: calc(100%-48px);
+    .page-info {
+        background-color: #ffff;
+        border-radius: 2px solid;
+    }
 }
 .el-header,
 .el-footer {
@@ -81,5 +85,6 @@ export default defineComponent({
     color: #333;
     text-align: center;
     background-color: #f0f2f5;
+    padding: 10px;
 }
 </style>
