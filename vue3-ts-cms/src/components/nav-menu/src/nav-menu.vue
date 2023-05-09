@@ -10,7 +10,7 @@
             <span v-if="!collapse" class="title">测试管理系统</span>
         </div>
         <el-menu
-            default-active="391"
+            :default-active="defaultMenuValue"
             class="el-menu-vertical"
             background-color="#0c2135"
             active-text-color="#0a60bd"
@@ -47,10 +47,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue"
+import { defineComponent, computed, ref } from "vue"
 import { Folder, CirclePlus, Tools, Monitor } from "@element-plus/icons-vue"
 import { useStore } from "@/store/index"
-import { useRouter } from "vue-router"
+import { useRouter, useRoute } from "vue-router"
+import { pathMapToMenu } from "@/utils/map-menus"
 
 export default defineComponent({
     components: { Folder, CirclePlus, Tools, Monitor },
@@ -70,9 +71,13 @@ export default defineComponent({
                 path: item.url ?? "/not-found"
             })
         }
-        // 动态给LOGO添加样式
+        // 储存当前用户菜单的选中
+        const route = useRoute()
+        const currentPath = route.path
+        const menu = pathMapToMenu(userMenus.value, currentPath)
+        const defaultMenuValue = ref<string>(menu.id + "")
 
-        return { userMenus, handleMenuItemClick }
+        return { userMenus, handleMenuItemClick, defaultMenuValue }
     }
 })
 </script>

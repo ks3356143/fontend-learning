@@ -1,10 +1,15 @@
 <template>
     <div class="chen-form">
-        <el-form label-width="100px" class="chen-form">
+        <el-form :label-width="labelWidth" class="chen-form">
             <el-row>
                 <template v-for="item in formItems" :key="item.label">
-                    <el-col :span="6">
-                        <el-form-item :label="item.label" :placeholder="item.placeholder">
+                    <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="1">
+                        <el-form-item
+                            :label="item.label"
+                            :placeholder="item.placeholder"
+                            :rules="item.rules"
+                            class="form-item"
+                        >
                             <template v-if="item.type === 'input' || item.type === 'password'">
                                 <el-input
                                     :placeholder="item.placeholder"
@@ -41,8 +46,13 @@ import type { IFormItem } from "@/base-ui/form/types"
 export default defineComponent({
     props: {
         formItems: {
+            // 数组和对象需要从vue导出PropType
             type: Array as PropType<IFormItem[]>,
             default: () => []
+        },
+        labelWidth: {
+            type: String,
+            default: () => "100px"
         }
     },
     setup() {
@@ -51,4 +61,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.chen-form {
+    padding-top: 8px;
+    margin-right: 10px;
+}
+</style>
