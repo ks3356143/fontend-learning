@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <div class="search">
-            <chenForm :form-items="searchFormConfig" :labelWidth="labelWidth"></chenForm>
+            <page-search :searchFormConfig="searchFormConfig"></page-search>
         </div>
         <div class="content"></div>
     </div>
@@ -9,18 +9,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import chenForm from "@/base-ui/form"
+import pageSearch from "@/components/page-search"
 import { searchFormConfig } from "@/views/main/system/user/config/searchConfig"
-
 export default defineComponent({
     name: "user",
-    components: { chenForm },
+    components: { pageSearch },
     setup() {
-        //外面决定里面form的label宽度
-        const labelWidth = "100px"
-        return { searchFormConfig, labelWidth }
+        return { searchFormConfig }
     }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+:global(.el-button) {
+    border-radius: 0;
+}
+</style>

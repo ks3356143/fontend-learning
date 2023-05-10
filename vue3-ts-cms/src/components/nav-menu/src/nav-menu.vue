@@ -71,7 +71,7 @@ export default defineComponent({
                 path: item.url ?? "/not-found"
             })
         }
-        // 储存当前用户菜单的选中
+        // 储存当前用户菜单的选中的default-active信息
         const route = useRoute()
         const currentPath = route.path
         const menu = pathMapToMenu(userMenus.value, currentPath)
