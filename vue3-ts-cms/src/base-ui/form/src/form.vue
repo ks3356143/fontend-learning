@@ -6,7 +6,7 @@
         <el-form :label-width="labelWidth" class="chen-form">
             <el-row>
                 <template v-for="item in formItems" :key="item.label">
-                    <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="1">
+                    <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                         <el-form-item
                             :label="item.label"
                             :placeholder="item.placeholder"

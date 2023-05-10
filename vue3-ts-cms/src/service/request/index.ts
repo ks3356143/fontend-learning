@@ -64,7 +64,7 @@ class chenRequest {
         )
     }
 
-    request<T>(config: ChenRequestConfig<T>): Promise<T> {
+    request<T = any>(config: ChenRequestConfig<T>): Promise<T> {
         return new Promise((resolve, reject) => {
             // 对请求中传参的拦截器进行单独拦截
             if (config.interceptors?.requestInterceptor) {
@@ -96,16 +96,16 @@ class chenRequest {
         })
     }
 
-    get<T>(config: ChenRequestConfig<T>): Promise<T> {
+    get<T = any>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "GET" })
     }
-    post<T>(config: ChenRequestConfig<T>): Promise<T> {
+    post<T = any>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "POST" })
     }
-    delete<T>(config: ChenRequestConfig<T>): Promise<T> {
+    delete<T = any>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "DELETE" })
     }
-    patch<T>(config: ChenRequestConfig<T>): Promise<T> {
+    patch<T = any>(config: ChenRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: "PATCH" })
     }
 }
