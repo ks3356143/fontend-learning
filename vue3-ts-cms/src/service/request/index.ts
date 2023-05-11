@@ -48,10 +48,10 @@ class chenRequest {
         this.instance.interceptors.response.use(
             (res) => {
                 // 所有实例响应成功均要拦截
-                //延迟下观看
+                // 延迟下观看
                 this.loading?.close()
                 const data = res.data
-                // 这里可以处理returnCode
+                // 这里拿到服务器没开的错误500
                 return data
             },
             (err) => {

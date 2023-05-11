@@ -10,6 +10,12 @@ import "animate.css"
 import "default-passive-events"
 //拿到用户直接访问main的
 import { setupStore } from "@/store/index"
+//注册我们自己写的属性
+import { registerProperties } from "@/global/registerProptires"
 //该函数必须要在use(router)前面才能注册
 setupStore()
-createApp(App).use(router).use(store).mount("#app")
+const app = createApp(App)
+app.use(router)
+app.use(store)
+app.use(registerProperties)
+app.mount("#app")
