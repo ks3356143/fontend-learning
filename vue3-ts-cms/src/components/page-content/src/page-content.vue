@@ -1,9 +1,9 @@
 <template>
     <div class="page-content">
-        <chen-table @selection-change="handleSelectionChange" :listData="userList" v-bind="contentTabelConfig">
+        <chen-table @selection-change="handleSelectionChange" :listData="dataList" v-bind="contentTabelConfig">
             <!-- 1.header插槽 -->
             <template #handler>
-                <el-button type="primary">新建用户</el-button>
+                <el-button type="primary">新建条目</el-button>
                 <el-button :icon="RefreshLeft" color="#588f27"></el-button>
             </template>
             <!-- 2.列中的插槽 -->
@@ -59,14 +59,14 @@ export default defineComponent({
                 size: 10
             }
         })
-        const userList = computed(() => store.state.system.userList)
+        const dataList = computed(() => store.getters[`system/pageListData`](props.pageName))
         // 分页器使用
         // const userCount = computed(() => store.state.system.userCount)
         //定义获取用户选择的选项
         const handleSelectionChange = (value: any) => {
             console.log(value)
         }
-        return { RefreshLeft, handleSelectionChange, userList }
+        return { RefreshLeft, handleSelectionChange, dataList }
     }
 })
 </script>

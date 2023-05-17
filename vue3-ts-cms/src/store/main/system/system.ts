@@ -22,33 +22,30 @@ const systemModule: Module<ISystemState, IRootState> = {
             state.userCount = userCount
         },
         changeRoleList(state: any, roleList: any[]) {
-            state.userList = roleList
+            state.roleList = roleList
         },
         changeRoleCount(state: any, roleCount: number) {
-            state.userCount = roleCount
+            state.roleCount = roleCount
         }
     },
     actions: {
         async getPageList({ commit }, payload: any) {
             // 1.获取url
             const pageName = payload.pageName
-            let pageUrl = ""
-            switch (pageName) {
-                // 根据不同pageName变为pageUrl
-                case "user":
-                    pageUrl = "api/user/list"
-                    break
-                case "role":
-                    pageUrl = "api/role/list"
-                    break
-            }
+            const pageUrl = `api/${pageName}/list`
             // 2.对页面发送请求
             const pageResult: any = await getPageListData(pageUrl, payload.queryInfo)
-
             // 3.将数据存储到state中
             const { list, totalCount } = pageResult.data
             commit(`change${_.capitalize(pageName)}List`, list)
             commit(`change${_.capitalize(pageName)}Count`, totalCount)
+        }
+    },
+    getters: {
+        pageListData(state) {
+            return (pageName: string) => {
+                return (state as any)[`${pageName}List`]
+            }
         }
     }
 }
