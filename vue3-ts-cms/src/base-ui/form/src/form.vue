@@ -18,7 +18,8 @@
                                     :placeholder="item.placeholder"
                                     :show-password="item.type === 'password'"
                                     v-bind="item.otherOption"
-                                    v-model="formData[`${item.field}`]"
+                                    :model-value="modelValue[`${item.field}`]"
+                                    @update:modelValue="handleValueChange($event, item.field)"
                                 ></el-input>
                             </template>
                             <template v-else-if="item.type === 'select'">
@@ -26,7 +27,8 @@
                                     :placeholder="item.placeholder"
                                     style="width: 100%"
                                     v-bind="item.otherOption"
-                                    v-model="formData[`${item.field}`]"
+                                    :model-value="modelValue[`${item.field}`]"
+                                    @update:modelValue="handleValueChange($event, item.field)"
                                 >
                                     <el-option v-for="option in item.options" :value="option.value" :key="option.value">
                                         {{ option.title }}
@@ -35,7 +37,8 @@
                             </template>
                             <template v-else-if="item.type === 'datepicker'">
                                 <el-date-picker
-                                    v-model="formData[`${item.field}`]"
+                                    :model-value="modelValue[`${item.field}`]"
+                                    @update:modelValue="handleValueChange($event, item.field)"
                                     style="width: 100%"
                                     v-bind="item.otherOption"
                                 ></el-date-picker>
@@ -73,18 +76,10 @@ export default defineComponent({
         }
     },
     setup(props, { emit }) {
-        // 原对象拷贝了一份
-        const formData = ref({ ...props.modelValue })
-        watch(
-            formData,
-            (newValue) => {
-                emit("update:modelValue", newValue)
-            },
-            {
-                deep: true
-            }
-        )
-        return { formData }
+        const handleValueChange = (value: any, filed: string) => {
+            emit("update:modelValue", { ...props.modelValue, [filed]: value })
+        }
+        return { handleValueChange }
     }
 })
 </script>

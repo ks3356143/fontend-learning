@@ -6,7 +6,7 @@
             </template>
             <template #footer>
                 <div class="handleBtnCss">
-                    <el-button type="primary" :icon="Refresh">重置</el-button>
+                    <el-button type="primary" :icon="Refresh" @click="resetFormValue">重置</el-button>
                     <el-button type="primary" :icon="Search">搜索</el-button>
                 </div>
             </template>
@@ -28,16 +28,20 @@ export default defineComponent({
         }
     },
     components: { chenForm },
-    setup() {
+    setup(props) {
         const labelWidth = "100px"
-        const formData = ref({
-            id: "",
-            name: "",
-            password: "",
-            sport: "",
-            createTime: ""
-        })
-        return { formData, Search, Refresh, labelWidth }
+        // 初始化formData，从Config过来
+        const formItem = props.searchFormConfig ?? ""
+        const formOriginData: any = {}
+        for (const item of formItem) {
+            formOriginData[item.field] = ""
+        }
+        const formData = ref(formOriginData)
+        // 重置按钮函数
+        const resetFormValue = () => {
+            formData.value = formOriginData
+        }
+        return { formData, Search, Refresh, labelWidth, resetFormValue }
     }
 })
 </script>
