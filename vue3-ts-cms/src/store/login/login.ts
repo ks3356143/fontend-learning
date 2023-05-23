@@ -8,7 +8,7 @@ import { accountLoginRequest, requestUserInfoById } from "@/service/login/login"
 import localCache from "@/utils/cache"
 import router from "@/router"
 // 导入路由
-import { mapMenusToRoutes } from "@/utils/map-menus"
+import { mapMenusToRoutes, mapMenusToPermissions } from "@/utils/map-menus"
 // 两个泛型参数，第一个是state类型，第二个是根模块类型
 const loginModule: Module<ILoginState, IRootState> = {
     namespaced: true,
@@ -163,6 +163,7 @@ const loginModule: Module<ILoginState, IRootState> = {
             routes.forEach((route: any) => {
                 router.addRoute("main", route)
             })
+            // 获取用户按钮的权限（未做）
         }
     },
     getters: {},

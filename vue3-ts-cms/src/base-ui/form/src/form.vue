@@ -6,7 +6,7 @@
         <el-form :label-width="labelWidth" class="chen-form">
             <el-row>
                 <template v-for="item in formItems" :key="item.label">
-                    <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+                    <el-col v-bind="colLayout">
                         <el-form-item
                             :label="item.label"
                             :placeholder="item.placeholder"
@@ -73,6 +73,16 @@ export default defineComponent({
         labelWidth: {
             type: String,
             default: () => "100px"
+        },
+        colLayout: {
+            type: Object,
+            default: () => ({
+                xl: 6,
+                lg: 6,
+                md: 8,
+                sm: 12,
+                xs: 24
+            })
         }
     },
     setup(props, { emit }) {

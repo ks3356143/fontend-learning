@@ -10,4 +10,5 @@ export interface ITableConfig {
     propList: ITableProp[]
     showIndexColumn?: boolean
     showSelectColumn?: boolean
+    childrenProps?: any
 }

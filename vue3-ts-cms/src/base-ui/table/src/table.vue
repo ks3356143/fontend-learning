@@ -9,7 +9,14 @@
                 </div>
             </slot>
         </div>
-        <el-table @selection-change="handleSelectionChange" :data="listData" border style="width: 100%">
+        <el-table
+            row-key="id"
+            @selection-change="handleSelectionChange"
+            :data="listData"
+            border
+            style="width: 100%"
+            v-bind="childrenProps"
+        >
             <el-table-column v-if="showSelectColumn" min-width="40px" type="selection" align="center"></el-table-column>
             <el-table-column
                 v-if="showIndexColumn"
@@ -19,7 +26,12 @@
                 label="序号"
             ></el-table-column>
             <template v-for="propItem in propList" :key="propItem.prop">
-                <el-table-column v-bind="propItem" align="center">
+                <el-table-column
+                    v-bind="propItem"
+                    align="center"
+                    show-overflow-tooltip
+                    :fixed="propItem.prop === '' ? 'right' : false"
+                >
                     <template #default="scope">
                         <slot :name="propItem.slotName" :row="scope.row">{{ scope.row[propItem.prop] }}</slot>
                     </template>
@@ -28,14 +40,14 @@
         </el-table>
         <div class="footer">
             <el-pagination
-                v-model:current-page="currentPage4"
-                v-model:page-size="pageSize4"
-                :page-sizes="[100, 200, 300, 400]"
-                :small="small"
-                :disabled="disabled"
-                :background="background"
+                :current-page="page.currentPage"
+                :page-size="page.pageSize"
+                :page-sizes="[10, 20, 50, 100]"
+                :small="false"
+                :disabled="false"
+                :background="true"
                 layout="->,total, sizes, prev, pager, next, jumper"
-                :total="400"
+                :total="listCount"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
             />
@@ -48,7 +60,7 @@ import { defineComponent, PropType } from "vue"
 import type { ITableProp } from "@/base-ui/table/types"
 
 export default defineComponent({
-    emits: ["selection-change"],
+    emits: ["selection-change", "update:page"],
     props: {
         title: {
             type: String,
@@ -69,14 +81,35 @@ export default defineComponent({
         showSelectColumn: {
             type: Boolean,
             default: false
+        },
+        listCount: {
+            type: Number,
+            default: 0
+        },
+        page: {
+            type: Object,
+            default: () => {
+                return { currentPage: 0, pageSize: 10 }
+            }
+        },
+        childrenProps: {
+            type: Object,
+            default: () => ({})
         }
     },
     setup(props, { emit }) {
-        //选择项改变后，会传过来value
+        // 选择项改变后，会传过来value
         const handleSelectionChange = (value: any) => {
             emit("selection-change", value)
         }
-        return { handleSelectionChange }
+        // 实现分页器
+        const handleSizeChange = (pageSize: number) => {
+            emit("update:page", { ...props.page, pageSize })
+        }
+        const handleCurrentChange = (currentPage: number) => {
+            emit("update:page", { ...props.page, currentPage })
+        }
+        return { handleSelectionChange, handleSizeChange, handleCurrentChange }
     }
 })
 </script>
