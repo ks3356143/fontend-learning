@@ -180,15 +180,19 @@ const loginModule: Module<ILoginState, IRootState> = {
             context.commit("changeUserInfo", userInfo)
             localCache.setCache("userInfo", userInfo)
             // 3.请求用户菜单！（暂时没做,这里需要改记得！）
-            context.commit("changeUserMenus")
+            // context.commit("changeUserMenus")
+            // 4.1 发送初始化请求
+            context.dispatch("getInitial", null, { root: true })
             // 4.跳转首页
             router.push("/main")
         },
         // 这个是在main.ts中调用初始化时启动
-        loadLocalLogin({ commit }) {
+        loadLocalLogin({ commit, dispatch }) {
             const token = localCache.getCache("token")
             if (token) {
                 commit("changeToken", token)
+                // 再掉一次初始化请求
+                dispatch("getInitial", null, { root: true })
             }
             const userInfo = localCache.getCache("userInfo")
             if (userInfo) {

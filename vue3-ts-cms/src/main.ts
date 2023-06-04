@@ -6,8 +6,6 @@ import router from "@/router/index"
 import store from "@/store/index"
 //引用animate动画
 import "animate.css"
-//安装default插件
-import "default-passive-events"
 //拿到用户直接访问main的
 import { setupStore } from "@/store/index"
 //注册我们自己写的属性

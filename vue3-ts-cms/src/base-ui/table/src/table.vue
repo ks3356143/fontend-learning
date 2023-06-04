@@ -97,7 +97,7 @@ export default defineComponent({
             default: () => ({})
         }
     },
-    setup(props, { emit }) {
+    setup(props, { emit, slots }) {
         // 选择项改变后，会传过来value
         const handleSelectionChange = (value: any) => {
             emit("selection-change", value)

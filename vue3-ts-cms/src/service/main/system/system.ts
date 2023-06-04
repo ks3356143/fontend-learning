@@ -13,3 +13,19 @@ export function deletePageData(url: string) {
         url: url
     })
 }
+
+// 新建逻辑
+export function createPageData(url: string, newData: any) {
+    return chenRequest.post<IDataType>({
+        url: url,
+        data: newData
+    })
+}
+
+// 编辑逻辑
+export function editPageData(url: string, editData: any) {
+    return chenRequest.post<IDataType>({
+        url: url,
+        data: editData
+    })
+}

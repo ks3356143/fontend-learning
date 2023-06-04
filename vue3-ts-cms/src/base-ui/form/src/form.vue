@@ -8,6 +8,7 @@
                 <template v-for="item in formItems" :key="item.label">
                     <el-col v-bind="colLayout">
                         <el-form-item
+                            v-if="!item.isHidden"
                             :label="item.label"
                             :placeholder="item.placeholder"
                             :rules="item.rules"
@@ -30,9 +31,12 @@
                                     :model-value="modelValue[`${item.field}`]"
                                     @update:modelValue="handleValueChange($event, item.field)"
                                 >
-                                    <el-option v-for="option in item.options" :value="option.value" :key="option.value">
-                                        {{ option.title }}
-                                    </el-option>
+                                    <el-option
+                                        v-for="option in item.options"
+                                        :value="option.value"
+                                        :label="option.title"
+                                        :key="option.value"
+                                    ></el-option>
                                 </el-select>
                             </template>
                             <template v-else-if="item.type === 'datepicker'">

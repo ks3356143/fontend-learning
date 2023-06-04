@@ -10,7 +10,7 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>
+                        <el-dropdown-item @click="handleexitClick">
                             <el-icon><CloseBold /></el-icon>
                             退出登录
                         </el-dropdown-item>
@@ -27,6 +27,8 @@
 import { defineComponent, computed } from "vue"
 import { ArrowDown, CloseBold } from "@element-plus/icons-vue"
 import { useStore } from "vuex"
+import localCache from "@/utils/cache"
+import { useRouter } from "vue-router"
 
 export default defineComponent({
     components: { ArrowDown, CloseBold },
@@ -36,7 +38,14 @@ export default defineComponent({
         const username = computed(() => {
             return store.state.login.userInfo.name
         })
-        return { username }
+        // 退出登录
+        const router = useRouter()
+        const handleexitClick = () => {
+            console.log("点击了退出登录，删除token")
+            localCache.deleteCache("token")
+            router.push("/main")
+        }
+        return { username, handleexitClick }
     }
 })
 </script>

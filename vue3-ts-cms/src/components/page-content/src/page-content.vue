@@ -9,13 +9,13 @@
         >
             <!-- 1.header插槽 -->
             <template #handler>
-                <el-button type="primary">新建条目</el-button>
+                <el-button type="primary" @click="handleNewClick">新建条目</el-button>
                 <el-button :icon="RefreshLeft" color="#588f27"></el-button>
             </template>
             <!-- 2.列中的插槽-固定 -->
-            <template #enable="slotProps">
-                <el-button plain size="small" :type="slotProps.row.enable ? 'success' : 'danger'">
-                    {{ slotProps.row.enable ? "启用" : "禁用" }}
+            <template #status="slotProps">
+                <el-button plain size="small" :type="slotProps.row.status ? 'success' : 'danger'">
+                    {{ slotProps.row.status ? "启用" : "禁用" }}
                 </el-button>
             </template>
             <template #createAt="slotProps">
@@ -26,7 +26,7 @@
             </template>
             <template #handle="slotProps">
                 <div class="handle-btns">
-                    <el-button size="small" color="#626aef">编辑</el-button>
+                    <el-button size="small" color="#626aef" @click="handleEditClick(slotProps.row)">编辑</el-button>
                     <el-button size="small" type="danger" @click="handleDeleteClick(slotProps.row)">删除</el-button>
                 </div>
             </template>
@@ -49,6 +49,7 @@ import chenTable from "@/base-ui/table"
 import type { ITableConfig } from "@/base-ui/table/types"
 
 export default defineComponent({
+    emit: ["newBtnClick", "editBtnClick"],
     components: { chenTable },
     props: {
         contentTabelConfig: {
@@ -60,7 +61,7 @@ export default defineComponent({
             required: true
         }
     },
-    setup(props) {
+    setup(props, { emit }) {
         const store = useStore()
         // 双向绑定pageInfo
         const pageInfo = ref({ currentPage: 1, pageSize: 10 })
@@ -104,7 +105,16 @@ export default defineComponent({
                 id: item.id
             })
         }
+        // 新建和编辑
+        const handleNewClick = () => {
+            emit("newBtnClick")
+        }
+        const handleEditClick = (item: any) => {
+            emit("editBtnClick", item)
+        }
         return {
+            handleNewClick,
+            handleEditClick,
             handleDeleteClick,
             getPageData,
             RefreshLeft,
